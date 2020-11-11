@@ -1,23 +1,27 @@
+import React from 'react'
+import { useForm } from 'react-hook-form';
+
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+const App = () => {
+
+  const { register, handleSubmit } = useForm();
+
+  const submit = (data) => {
+    const arr = data.submit.split(',');
+    arr.forEach(element => {
+      console.log(element);
+      window.open(`https://comestate.agency/object?id=${element.trim()}`);
+    });
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input ref={register} name='submit' type='text' />
+      <button onClick={handleSubmit(submit)}>
+        Открыть
+       </button>
     </div>
   );
 }
